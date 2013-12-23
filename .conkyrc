@@ -84,3 +84,31 @@ ${color FFFFFF}${font caviar dreams:size=8}Running: ${running_processes}
 ${color 0066FF}${font caviar dreams:size=8}${alignr}${nodename}
 #${color 0066FF}${font caviar dreams:size=8}${alignr}${pre_exec cat /etc/issue.net}  $machine
 ${color 0066FF}${font caviar dreams:size=8}${alignr}Kernel: ${kernel}
+
+
+# Processes
+
+${color 517DA0}CPU0: ${offset 6}${color 73A5E8}${cpu cpu0}% ${offset -6}${alignr}${cpubar cpu1 8,60}
+${voffset 3}${color 517DA0}CPU1: ${offset 9}${color 73A5E8}${cpu cpu1}% ${offset -9}${alignr}${cpubar cpu2 8,60}
+
+${voffset 50}
+${offset 43}${color 517DA0}${font INFECTED:size=20}TOP CPU${font}
+${voffset 10}${color 73A5E8}${font JUICE Bold:size=8}${top name 1}${alignr}${top cpu 1}
+${top name 2}${alignr}${top cpu 2}
+${top name 3}${alignr}${top cpu 3}
+${top name 4}${alignr}${top cpu 4}
+${top name 5}${alignr}${top cpu 5}
+${top name 6}${alignr}${top cpu 6}
+${top name 7}${alignr}${top cpu 7}
+${top name 8}${alignr}${top cpu 8}
+${offset 43}${color 517DA0}${font INFECTED:size=20}TOP MEM${font}
+${voffset 10}${color 73A5E8}${font JUICE Bold:size=8}${top_mem name 1}${alignr}${top_mem mem 1}
+${top_mem name 2}${alignr}${top_mem mem 2}
+${top_mem name 3}${alignr}${top_mem mem 3}
+${top_mem name 4}${alignr}${top_mem mem 4}
+${top_mem name 5}${alignr}${top_mem mem 5}
+${top_mem name 6}${alignr}${top_mem mem 6}
+${top_mem name 7}${alignr}${top_mem mem 7}
+${top_mem name 8}${alignr}${top_mem mem 8}
+
+
