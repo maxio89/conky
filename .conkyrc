@@ -1,92 +1,88 @@
-# Conky settings #
-background no
+#==============================================================================
+#                                 conkyrc_grey
+#								http://www.NoobsLab.com
+#  author  : SLK
+#  version : v2011011601
+#  license : Distributed under the terms of GNU GPL version 2 or later
+#
+#==============================================================================
+
+background yes
 update_interval 1
 
 cpu_avg_samples 2
 net_avg_samples 2
-
-override_utf8_locale yes
+temperature_unit celsius
 
 double_buffer yes
 no_buffers yes
-
 text_buffer_size 2048
-#imlib_cache_size 0
 
-temperature_unit fahrenheit
-
-# Window specifications #
-
+gap_x 10
+gap_y 30
+minimum_size 190 450
+maximum_width 190
 own_window yes
-own_window_type override
+own_window_type conky
+own_window_argb_visual yes
 own_window_transparent yes
 own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
-
 border_inner_margin 0
 border_outer_margin 0
-
-minimum_size 200 250
-maximum_width 200
-
 alignment tr
-gap_x 35
-gap_y 55
 
-# Graphics settings #
 draw_shades no
 draw_outline no
 draw_borders no
 draw_graph_borders no
 
-# Text settings #
+override_utf8_locale yes
 use_xft yes
 xftfont caviar dreams:size=8
 xftalpha 0.5
-
 uppercase no
 
-temperature_unit celsius
-
-
 default_color FFFFFF
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+color4 666666
 
-# Lua Load  #
-lua_load ~/.conky/lua/clock_rings.lua
-lua_draw_hook_pre clock_rings
+lua_load ~/.conky/conky_grey.lua
+lua_draw_hook_post main
 
 TEXT
-${voffset 8}${color 0066FF}${font caviar dreams:size=16}${time %A}${font}${voffset -8}${alignr 50}${color FFFFFF}${font caviar dreams:size=38}${time %e}${font}
-${color FFFFFF}${voffset -30}${color FFFFFF}${font caviar dreams:size=18}${time %b}${font}${voffset -3} ${color FFFFFF}${font caviar dreams:size=20}${time %Y}${font}${color 0066FF}${hr}
-${voffset 140}${font caviar dreams:size=10}${alignr}HOME${font}
-#${font caviar dreams:size=12}${color FFFFFF}${alignr}${weather http://weather.noaa.gov/weather/current/EPKK temperature temperature 30} °C${font}
-${image ~/.conky/fedora-logo.png -p 58,115 -s 80x35}
+${voffset 35}
+${goto 95}${color4}${font ubuntu:size=22}${time %e}${color1}${offset -50}${font ubuntu:size=10}${time %A}
+${goto 85}${color2}${voffset -2}${font ubuntu:size=9}${time %b}${voffset -2} ${color3}${font ubuntu:size=12}${time %Y}${font}
 
-${color FFFFFF}${goto 5}${voffset 15}${cpu cpu1}%
-${color FFFFFF}${goto 5}${cpu cpu2}%
-${color FFFFFF}${goto 5}${cpu cpu3}%
-${color FFFFFF}${goto 5}${cpu cpu4}%
-${color 0066FF}${goto 5}CPU
-${color FFFFFF}${goto 50}${voffset 23}${memperc}%
-${color 0066FF}${goto 50}RAM
-${color FFFFFF}${goto 75}${voffset 23}${swapperc}%
-${color 0066FF}${goto 75}Swap
-${color FFFFFF}${goto 100}${voffset 10}${fs_free /home} /home
-${color FFFFFF}${goto 100}${fs_free /} /
-${color 0066FF}${goto 100}Disk
-${color FFFFFF}${goto 125}${voffset 15}${downspeed wlp6s0}
-${color FFFFFF}${goto 125}${upspeed wlp6s0}
-${color 0066FF}${goto 125}Net
+${voffset 80}
+${goto 90}${font Ubuntu:size=7,weight:bold}${color}CPU
+${goto 90}${font Ubuntu:size=7,weight:normal}${color1}${top name 1}${alignr}${top cpu 1}%
+${goto 90}${font Ubuntu:size=7,weight:normal}${color2}${top name 2}${alignr}${top cpu 2}%
+${goto 90}${font Ubuntu:size=7,weight:normal}${color3}${top name 3}${alignr}${top cpu 3}%
+${goto 90}${cpugraph 10,100 666666 666666}
+${goto 90}${voffset -10}${font Ubuntu:size=7,weight:normal}${color}${threads} process 
 
+${voffset 20}
+${goto 90}${font Ubuntu:size=7,weight:bold}${color}MEM
+${goto 90}${font Ubuntu:size=7,weight:normal}${color1}${top_mem name 1}${alignr}${top_mem mem 1}%
+${goto 90}${font Ubuntu:size=7,weight:normal}${color2}${top_mem name 2}${alignr}${top_mem mem 2}%
+${goto 90}${font Ubuntu:size=7,weight:normal}${color3}${top_mem name 3}${alignr}${top_mem mem 3}%
+
+${voffset 15}
+${goto 90}${font Ubuntu:size=7,weight:bold}${color}DISKS
 
 
-${color FFFFFF}${font caviar dreams:size=8}Uptime: ${uptime_short}
-#requires acpi client
-#acpi -b | awk "{print $1}" | sed 's/\([^:]*\): \([^,]*\), \([0-9]*\)%.*/\3/'
-${color FFFFFF}${font caviar dreams:size=8}Battery:  ${battery_percent BAT1} % 
-${color FFFFFF}${font caviar dreams:size=8}Processes: ${processes}
-${color FFFFFF}${font caviar dreams:size=8}Running: ${running_processes}
+${goto 90}${font Ubuntu:size=7,weight:normal}${color}HDD used: ${fs_used /} /
+${goto 90}${diskiograph 30,100 666666 666666}${voffset -30}
 
+${voffset 10}
+${goto 70}${font Ubuntu:size=18,weight:bold}${color3}NET${alignr}${color2}${font Ubuntu:size=7,weight:bold}${color1}
+${alignr}${if_up eth0}Upload: ${upspeed eth0} 
+${alignr}Download: ${downspeed eth0}
+${alignr}IP: ${addr eth0} 
+${alignr}${endif}${if_up wlan0}Upload: ${upspeed wlan0}
+${alignr}Download: ${downspeed wlan0}
+${alignr}IP: ${addr wlan0}${endif}
 
-${color 0066FF}${font caviar dreams:size=8}${alignr}${nodename}
-#${color 0066FF}${font caviar dreams:size=8}${alignr}${pre_exec cat /etc/issue.net}  $machine
-${color 0066FF}${font caviar dreams:size=8}${alignr}Kernel: ${kernel}
