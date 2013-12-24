@@ -60,20 +60,13 @@ color1 efefef
 color2 1994D1
 #color3 1994D1 
 
-# Lua Load  ##${voffset 750}
-#lua_load ~/.conky/lua/script.lua
-#lua_draw_hook_pre ring_stats
-#lua_draw_hook_pre conky_main
 lua_load ~/.conky/lua/clock_rings.lua
 lua_draw_hook_pre clock_rings
 lua_draw_hook_post main
-#lua_load ~/.conky/lua/script.lua
-#lua_draw_hook_pre main
 
-#lua_load ~/.conky/lua/script.lua
-#lua_draw_hook_pre main
 
 TEXT
+#DATE
 ${goto 80}${voffset 100}${color FFFFFF}${font Play:normal:size=16}${time %A}${font}${voffset -8}${alignr 50}${color0}
 ${goto 160}${voffset -26}${font Play:normal:size=44}${time %e}${font}
 ${goto 80}${color FFFFFF}${voffset -20}${color FFFFFF}${font Play:normal:size=14}${time %b}${font}${voffset -20} ${color FFFFFF}
@@ -91,6 +84,7 @@ ${goto 50}${font Play:normal:size=8}${color1}${top name 2}${alignr 306}${top cpu
 ${goto 50}${font Play:normal:size=8}${color1}${top name 3}${alignr 306}${top cpu 3}%
 ${font Michroma:size=10}${color0}${goto 80}${voffset 4}CPU 
 
+#NEW EMAILS COUNTER
 ${image ~/.conky/envelope-icon.png -p 405,284 -s 60x44}
 ${font Michroma:size=18}${goto 318}${color1}${voffset -86}${execpi 300 python3 ~/.conky/gmail.py}
 
@@ -102,28 +96,28 @@ ${font Play:normal:size=8}${voffset 12}${goto 348}${color1}SWAP${alignr 40}${col
 ${font Play:normal:size=8}${voffset 2}${goto 348}${color1}RAM ${alignr 40}${color1}${mem} / ${color1}${memmax}
 ${font Play:normal:size=8}${goto 80}${voffset -66}Root${color1}${alignr 310}${fs_used /} / ${fs_size /}
 ${font Play:normal:size=8}${goto 80}${voffset 2}Home${alignr 310}${color1}${fs_used /home} / ${fs_size /home}
+
 ${font Michroma:size=10}${color0}${goto 66}${voffset 10}HARD  DRIVE
-${font Michroma:size=10}${color0}${voffset 42}${goto 324}INTERNET  INFO
-# EDITION FINIR WLAN
-${if_existing /proc/net/route wlo1}${font Play:normal:size=8}${color1}${alignr 54}${voffset -8}WiFi  ${color1}${wireless_essid wlo1}
-${font Play:normal:size=8}${color1}${goto 298}${voffset 2}Up${goto 370}${color1}${totalup wlo1} / ${color1}${upspeed wlo1}
-${font Play:normal:size=8}${goto 298}${color1}Down${goto 370}${color1}${totaldown wlo1} / ${color1}${downspeed wlo1}
-${font Play:bold:size=8}${goto 300}${voffset 2}Local IP${goto 370}${addr wlo1}
-${font Play:bold:size=8}${goto 300}${voffset 1}Public IP${goto 370}${execi 3600 wget -q -O - checkip.dyndns.org | sed -e 's/[^[:digit:]\|.]//g'}
-${font Michroma:size=9}${goto 90}${voffset -42}${color0}${time %a} ${color0}${time %x}
-${font Michroma:size=18}${goto 108}${color1}${voffset -4}${time %H}:${time %M}
-${font Michroma:size=8}${color0}${goto 296}${voffset 20}BATTERY
-${font Play:size=8}${color0}${goto 278}${voffset 9}${color1}${battery_percent BAT1}%
-# |--wlp6s0
-${else}${if_existing /proc/net/route wlp6s0}${font Play:normal:size=8}${color1}${goto 298}${voffset 6}Up${goto 370}${color1}${totalup wlp6s0} / ${color1}${upspeed wlp6s0}
+
+${font Michroma:size=10}${color0}${voffset 12}${goto 324}INTERNET  INFO
+# IF WIFI IS CONNECTED
+${if_existing /proc/net/route wlp6s0}
+${font Play:normal:size=8}${color1}${alignr 54}${voffset -25}WiFi  ${color1}${wireless_essid wlp6s0}
+${font Play:normal:size=8}${color1}${goto 298}${voffset 2}Up${goto 370}${color1}${totalup wlp6s0} / ${color1}${upspeed wlp6s0}
 ${font Play:normal:size=8}${goto 298}${color1}Down${goto 370}${color1}${totaldown wlp6s0} / ${color1}${downspeed wlp6s0}
 ${font Play:bold:size=8}${goto 300}${voffset 2}Local IP${goto 370}${addr wlp6s0}
 ${font Play:bold:size=8}${goto 300}${voffset 1}Public IP${goto 370}${execi 3600 wget -q -O - checkip.dyndns.org | sed -e 's/[^[:digit:]\|.]//g'}
-#${font Michroma:size=9}${alignr 298}${voffset -42}${color0}${time %a} ${color0}${time %x}
-#${font Michroma:size=18}${goto 108}${color1}${voffset -4}${time %H}:${time %M}
-${font Michroma:size=8}${color0}${goto 296}${voffset 40}BATTERY
-${font Play:size=8}${color0}${goto 278}${voffset 8}${color1}${battery_percent BAT1}%${endif}${endif}
-#${font Play:normal:size=8}${goto 180}Weather${color1}${alignr 100}${execi 300 ~/bin/weather_simple "EUR|UK|UK241|LONDON"}
-${voffset 20}${font Play:normal:size=8}${goto 180}Uptime${color1}${alignr 100}${uptime_short}
+# ELSE CHECK ETH0
+${else}${if_existing /proc/net/route eth0}
+${font Play:normal:size=8}${color1}${goto 298}${voffset 6}Up${goto 370}${color1}${totalup eth0} / ${color1}${upspeed eth0}
+${font Play:normal:size=8}${goto 298}${color1}Down${goto 370}${color1}${totaldown eth0} / ${color1}${downspeed eth0}
+${font Play:bold:size=8}${goto 300}${voffset 2}Local IP${goto 370}${addr eth0}
+${font Play:bold:size=8}${goto 300}${voffset 1}Public IP${goto 370}${execi 3600 wget -q -O - checkip.dyndns.org | sed -e 's/[^[:digit:]\|.]//g'}
+${endif}${endif}
+
+${font Michroma:size=8}${color0}${goto 296}${voffset 18}BATTERY
+${font Play:size=8}${color0}${goto 278}${voffset 6}${color1}${battery_percent BAT1}%
+
+${voffset 10}${font Play:normal:size=8}${goto 180}Uptime${color1}${alignr 100}${uptime_short}
 ${font Michroma:bold:size=11}${color0}${voffset 30}${alignr 100}${nodename}   ${kernel}
 

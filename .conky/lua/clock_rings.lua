@@ -575,7 +575,7 @@ end
 -- Contrôle de l'interface active
 function iface_watch()
 
-    iface=conky_parse("${if_existing /proc/net/route wlp6s0}wlp6s0${else}wlan0${endif}")
+    iface=conky_parse("${if_existing /proc/net/route wlp6s0}wlp6s0${else}eth0${endif}")
 
     settings_table[15]['arg']=iface
     settings_table[16]['arg']=iface
