@@ -29,7 +29,7 @@ Changelog:
 --ar,ag,ab,aa=1,0,0,1
 
 -- couleurs 1
--- AAF334
+-- 0066FF
 -- f0651f
 -- f01f42
 -- couleurs 2 + flashy
@@ -37,11 +37,11 @@ Changelog:
 -- ff7200
 -- ff000d
 
---normal_temp="0xAAF334"
+--normal_temp="0x0066FF"
 --warn_temp="0xf0651f"
 --crit_temp="0xf01f42"
 -- Un mélange des deux
-normal="0xAAF334"
+normal="0x0066FF"
 warn="0xff7200"
 crit="0xff000d"
 
@@ -52,16 +52,99 @@ bg_alpha=0.2
 
 
 settings_table = {
-    
+    {
+        -- Edit this table to customise your rings.
+        -- You can create more rings simply by adding more elements to settings_table.
+        -- "name" is the type of stat to display; you can choose from 'cpu', 'memperc', 'fs_used_perc', 'battery_used_perc'.
+        name='time',
+        -- "arg" is the argument to the stat type, e.g. if in Conky you would write ${cpu cpu0}, 'cpu0' would be the argument. If you would not use an argument in the Conky variable, use ''.
+        arg='%I.%M',
+        -- "max" is the maximum value of the ring. If the Conky variable outputs a percentage, use 100.
+        max=12,
+        -- "bg_colour" is the colour of the base ring.
+        bg_colour=0xffffff,
+        -- "bg_alpha" is the alpha value of the base ring.
+        bg_alpha=0.1,
+        -- "fg_colour" is the colour of the indicator part of the ring.
+        fg_colour=0x0066FF,
+        -- "fg_alpha" is the alpha value of the indicator part of the ring.
+        fg_alpha=0.3,
+        -- "x" and "y" are the x and y coordinates of the centre of the ring, relative to the top left corner of the Conky window.
+        x=360, y=160,
+        -- "radius" is the radius of the ring.
+        radius=70,
+        -- "thickness" is the thickness of the ring, centred around the radius.
+        thickness=10,
+        -- "start_angle" is the starting angle of the ring, in degrees, clockwise from top. Value can be either positive or negative.
+        start_angle=0,
+        -- "end_angle" is the ending angle of the ring, in degrees, clockwise from top. Value can be either positive or negative, but must be larger than start_angle.
+        end_angle=360
+    },
+    {
+        name='time',
+        arg='%M.%S',
+        max=60,
+        bg_colour=0xdddddd,
+        bg_alpha=0.1,
+        fg_colour=0x0066FF,
+        fg_alpha=0.4,
+        x=360, y=160,
+        radius=83,
+        thickness=10,
+        start_angle=0,
+        end_angle=360
+    },
+    {
+        name='time',
+        arg='%S',
+        max=60,
+        bg_colour=0xdddddd,
+        bg_alpha=0.1,
+        fg_colour=0x0066FF,
+        fg_alpha=0.6,
+        x=360, y=160,
+        radius=97,
+        thickness=12,
+        start_angle=0,
+        end_angle=360
+    },
+    {
+        name='time',
+        arg='%d',
+        max=31,
+        bg_colour=0xdddddd,
+        bg_alpha=0.1,
+        fg_colour=0x0066FF,
+        fg_alpha=0.8,
+        x=360, y=160,
+        radius=110,
+        thickness=6,
+        start_angle=-90,
+        end_angle=90
+    },
+    {
+        name='time',
+        arg='%m',
+        max=12,
+        bg_colour=0xdddddd,
+        bg_alpha=0.1,
+        fg_colour=0x0066FF,
+        fg_alpha=1,
+        x=360, y=160,
+        radius=120,
+        thickness=6,
+        start_angle=-90,
+        end_angle=90
+    },
     {
         name='acpitemp',
         arg='',
         max=110,
         bg_colour=0xdddddd,
         bg_alpha=0.8,
-        fg_colour=0xAAF334,
+        fg_colour=0x0066FF,
         fg_alpha=0.8,
-        x=200, y=120,
+        x=200, y=300,
         radius=97,
         thickness=4,
         start_angle=0,
@@ -73,9 +156,9 @@ settings_table = {
         max=100,
         bg_colour=0xdddddd,
         bg_alpha=0.8,
-        fg_colour=0xAAF334,
+        fg_colour=0x0066FF,
         fg_alpha=0.8,
-        x=200, y=120,
+        x=200, y=300,
         radius=86,
         thickness=13,
         start_angle=0,
@@ -87,9 +170,9 @@ settings_table = {
         max=100,
         bg_colour=0xdddddd,
         bg_alpha=0.7,
-        fg_colour=0xAAF334,
+        fg_colour=0x0066FF,
         fg_alpha=0.8,
-        x=200, y=120,
+        x=200, y=300,
         radius=71,
         thickness=12,
         start_angle=0,
@@ -101,9 +184,9 @@ settings_table = {
         max=100,
         bg_colour=0xdddddd,
         bg_alpha=0.6,
-        fg_colour=0xAAF334,
+        fg_colour=0x0066FF,
         fg_alpha=0.8,
-        x=200, y=120,
+        x=200, y=300,
         radius=57,
         thickness=11,
         start_angle=0,
@@ -115,9 +198,9 @@ settings_table = {
         max=100,
         bg_colour=0xdddddd,
         bg_alpha=0.5,
-        fg_colour=0xAAF334,
+        fg_colour=0x0066FF,
         fg_alpha=0.8,
-        x=200, y=120,
+        x=200, y=300,
         radius=44,
         thickness=10,
         start_angle=0,
@@ -129,9 +212,9 @@ settings_table = {
         max=100,
         bg_colour=0xdddddd,
         bg_alpha=0.8,
-        fg_colour=0xAAF334,
+        fg_colour=0x0066FF,
         fg_alpha=0.8,
-        x=340, y=234,
+        x=340, y=414,
         radius=60,
         thickness=15,
         start_angle=180,
@@ -143,9 +226,9 @@ settings_table = {
         max=100,
         bg_colour=0xdddddd,
         bg_alpha=0.4,
-        fg_colour=0xAAF334,
+        fg_colour=0x0066FF,
         fg_alpha=0.8,
-        x=340, y=234,
+        x=340, y=414,
         radius=45,
         thickness=10,
         start_angle=180,
@@ -156,25 +239,11 @@ settings_table = {
         arg='/',
         max=100,
         bg_colour=0xdddddd,
-        bg_alpha=0.8,
-        fg_colour=0xAAF334,
+        bg_alpha=0.4,
+        fg_colour=0x0066FF,
         fg_alpha=0.8,
-        x=220, y=280,
-        radius=40,
-        thickness=10,
-        start_angle=0,
-        end_angle=240
-    },
-    {
-        name='fs_used_perc',
-        arg='/var',
-        max=100,
-        bg_colour=0xdddddd,
-        bg_alpha=0.6,
-        fg_colour=0xAAF334,
-        fg_alpha=0.8,
-        x=220, y=280,
-        radius=28,
+        x=220, y=460,
+        radius=25,
         thickness=10,
         start_angle=0,
         end_angle=240
@@ -184,12 +253,12 @@ settings_table = {
         arg='/home',
         max=100,
         bg_colour=0xdddddd,
-        bg_alpha=0.4,
-        fg_colour=0xAAF334,
+        bg_alpha=0.8,
+        fg_colour=0x0066FF,
         fg_alpha=0.8,
-        x=220, y=280,
-        radius=16,
-        thickness=10,
+        x=220, y=460,
+        radius=40,
+        thickness=14,
         start_angle=0,
         end_angle=240
     },
@@ -199,9 +268,9 @@ settings_table = {
         max=2000,
         bg_colour=0xdddddd,
         bg_alpha=0.8,
-        fg_colour=0xAAF334,
+        fg_colour=0x0066FF,
         fg_alpha=0.8,
-        x=290, y=346,
+        x=290, y=526,
         radius=30,
         thickness=12,
         start_angle=180,
@@ -213,55 +282,13 @@ settings_table = {
         max=200,
         bg_colour=0xdddddd,
         bg_alpha=0.6,
-        fg_colour=0xAAF334,
+        fg_colour=0x0066FF,
         fg_alpha=0.8,
-        x=290, y=346,
+        x=290, y=526,
         radius=18,
         thickness=8,
         start_angle=180,
         end_angle=420
-    },
-    {
-        name='time',
-        arg='%S',
-        max=60,
-        bg_colour=0xdddddd,
-        bg_alpha=0.8,
-        fg_colour=0xAAF334,
-        fg_alpha=0.8,
-        x=230, y=410,
-        radius=30,
-        thickness=12,
-        start_angle=0,
-        end_angle=240
-    },
-    {
-        name='time',
-        arg='%M',
-        max=60,
-        bg_colour=0xdddddd,
-        bg_alpha=0.6,
-        fg_colour=0xAAF334,
-        fg_alpha=0.8,
-        x=230, y=410,
-        radius=18,
-        thickness=8,
-        start_angle=0,
-        end_angle=240
-    },
-    {
-        name='time',
-        arg='%H',
-        max=24,
-        bg_colour=0xdddddd,
-        bg_alpha=0.4,
-        fg_colour=0xAAF334,
-        fg_alpha=0.8,
-        x=230, y=410,
-        radius=10,
-        thickness=4,
-        start_angle=0,
-        end_angle=240
     },
     {
         name='battery_percent',
@@ -269,9 +296,9 @@ settings_table = {
         max=100,
         bg_colour=0xdddddd,
         bg_alpha=0.6,
-        fg_colour=0xAAF334,
+        fg_colour=0x0066FF,
         fg_alpha=0.8,
-        x=274, y=464,
+        x=274, y=644,
         radius=18,
         thickness=10,
         start_angle=180,
@@ -283,9 +310,9 @@ settings_table = {
         max=100,
         bg_colour=0xdddddd,
         bg_alpha=0.6,
-        fg_colour=0xAAF334,
+        fg_colour=0x0066FF,
         fg_alpha=0.6,
-        x=274, y=464,
+        x=274, y=644,
         radius=3,
         thickness=13,
         start_angle=0,
@@ -293,35 +320,12 @@ settings_table = {
     },
 }
 
+
+
 require 'cairo'
 
 function rgb_to_r_g_b(colour,alpha)
 	return ((colour / 0x10000) % 0x100) / 255., ((colour / 0x100) % 0x100) / 255., (colour % 0x100) / 255., alpha
-end
-
-function draw_ring(cr,t,pt)
-
-	local w,h=conky_window.width,conky_window.height
-	
-	local xc,yc,ring_r,ring_w,sa,ea=pt['x'],pt['y'],pt['radius'],pt['thickness'],pt['start_angle'],pt['end_angle']
-	local bgc, bga, fgc, fga=pt['bg_colour'], pt['bg_alpha'], pt['fg_colour'], pt['fg_alpha']
-
-	local angle_0=sa*(2*math.pi/360)-math.pi/2
-	local angle_f=ea*(2*math.pi/360)-math.pi/2
-	local t_arc=t*(angle_f-angle_0)
-
-	-- Draw background ring
-
-	cairo_arc(cr,xc,yc,ring_r,angle_0,angle_f)
-	cairo_set_source_rgba(cr,rgb_to_r_g_b(bgc,bga))
-	cairo_set_line_width(cr,ring_w)
-	cairo_stroke(cr)
-	
-	-- Draw indicator ring
-
-	cairo_arc(cr,xc,yc,ring_r,angle_0,angle_0+t_arc)
-	cairo_set_source_rgba(cr,rgb_to_r_g_b(fgc,fga))
-	cairo_stroke(cr)		
 end
 
 function conky_ring_stats()
@@ -450,6 +454,7 @@ function conky_main()
     disk_watch()
     iface_watch()
     conky_ring_stats()
+
 -- quand fond nécessaire
 --    conky_draw_bg()
 end

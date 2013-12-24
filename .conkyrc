@@ -34,8 +34,8 @@ minimum_size 520 600
 maximum_width 520
 
 alignment tr
-gap_x -20
-gap_y 100 
+gap_x 0
+gap_y 0 
 
 # Graphics settings #
 draw_shades no
@@ -55,18 +55,29 @@ xftalpha 0.9
 uppercase no
 
 default_color 333333
-color0 b2ff34
+color0 0066FF
 color1 efefef
 color2 1994D1
 #color3 1994D1 
 
 # Lua Load  ##${voffset 750}
-lua_load ~/.conky/lua/script.lua
+#lua_load ~/.conky/lua/script.lua
 #lua_draw_hook_pre ring_stats
-lua_draw_hook_pre conky_main
+#lua_draw_hook_pre conky_main
+lua_load ~/.conky/lua/clock_rings.lua
+lua_draw_hook_post clock_rings
+#lua_load ~/.conky/lua/script.lua
+#lua_draw_hook_pre main
 
 TEXT
-${font Play:normal:size=8}${voffset 16}${color1}${goto 106}${freq_g cpu0} Ghz${alignr 330}${acpitemp} °C
+${goto 80}${voffset 100}${color FFFFFF}${font Play:normal:size=16}${time %A}${font}${voffset -8}${alignr 50}${color0}
+${goto 160}${voffset -26}${font Play:normal:size=44}${time %e}${font}
+${goto 80}${color FFFFFF}${voffset -20}${color FFFFFF}${font Play:normal:size=14}${time %b}${font}${voffset -20} ${color FFFFFF}
+${goto 114}${font Play:normal:size=14}${time %Y}${font}${color 0066FF}
+
+${image ~/.conky/fedora-logo.png -p 305,100 -s 104x104}
+
+${font Play:normal:size=8}${voffset 14}${color1}${goto 106}${freq_g cpu0} Ghz${alignr 330}${acpitemp} °C
 ${font Play:normal:size=8}${voffset 0}${goto 120}${color1}CPU 1 ${alignr 330}${color1}${cpu cpu0}%
 ${font Play:normal:size=8}${voffset 2}${goto 120}${color1}CPU 2${alignr 330}${color1}${cpu cpu1}%
 ${font Play:normal:size=8}${voffset 2}${goto 120}${color1}CPU 3${alignr 330}${color1}${cpu cpu2}%
@@ -75,17 +86,20 @@ ${goto 50}${voffset 16}${font Play:normal:size=8}${color1}${top name 1}${alignr 
 ${goto 50}${font Play:normal:size=8}${color1}${top name 2}${alignr 306}${top cpu 2}%
 ${goto 50}${font Play:normal:size=8}${color1}${top name 3}${alignr 306}${top cpu 3}%
 ${font Michroma:size=10}${color0}${goto 80}${voffset 4}CPU 
-${font Michroma:size=10}${color0}${goto 394}${voffset 48}MEMORY
+
+${image ~/.conky/envelope-icon.png -p 405,284 -s 60x44}
+${font Michroma:size=18}${goto 318}${color1}${voffset -86}${execpi 300 python3 ~/.conky/gmail.py}
+
+${font Michroma:size=10}${color0}${goto 394}${voffset 18}MEMORY
 ${goto 324}${voffset -2}${font Play:normal:size=8}${color1}${top_mem name 1}${alignr 40}${top_mem mem 1}%
 ${goto 324}${font Play:normal:size=8}${color1}${top_mem name 2}${alignr 40}${top_mem mem 2}%
 ${goto 324}${font Play:normal:size=8}${color1}${top_mem name 3}${alignr 40}${top_mem mem 3}%
 ${font Play:normal:size=8}${voffset 12}${goto 348}${color1}SWAP${alignr 40}${color1}${swap} / ${color1}${swapmax}
 ${font Play:normal:size=8}${voffset 2}${goto 348}${color1}RAM ${alignr 40}${color1}${mem} / ${color1}${memmax}
-${font Play:normal:size=8}${goto 80}${voffset -68}Root${color1}${alignr 310}${fs_used /} / ${fs_size /}
-${font Play:normal:size=8}${goto 80}${voffset 0}Var${alignr 310}${color1}${fs_used /var} / ${fs_size /var}
-${font Play:normal:size=8}${goto 80}${voffset 0}Home${alignr 310}${color1}${fs_used /home} / ${fs_size /home}
+${font Play:normal:size=8}${goto 80}${voffset -66}Root${color1}${alignr 310}${fs_used /} / ${fs_size /}
+${font Play:normal:size=8}${goto 80}${voffset 2}Home${alignr 310}${color1}${fs_used /home} / ${fs_size /home}
 ${font Michroma:size=10}${color0}${goto 66}${voffset 10}HARD  DRIVE
-${font Michroma:size=10}${color0}${voffset 34}${goto 324}INTERNET  INFO
+${font Michroma:size=10}${color0}${voffset 42}${goto 324}INTERNET  INFO
 # EDITION FINIR WLAN
 ${if_existing /proc/net/route wlo1}${font Play:normal:size=8}${color1}${alignr 54}${voffset -8}WiFi  ${color1}${wireless_essid wlo1}
 ${font Play:normal:size=8}${color1}${goto 298}${voffset 2}Up${goto 370}${color1}${totalup wlo1} / ${color1}${upspeed wlo1}
@@ -101,12 +115,11 @@ ${else}${if_existing /proc/net/route wlp6s0}${font Play:normal:size=8}${color1}$
 ${font Play:normal:size=8}${goto 298}${color1}Down${goto 370}${color1}${totaldown wlp6s0} / ${color1}${downspeed wlp6s0}
 ${font Play:bold:size=8}${goto 300}${voffset 2}Local IP${goto 370}${addr wlp6s0}
 ${font Play:bold:size=8}${goto 300}${voffset 1}Public IP${goto 370}${execi 3600 wget -q -O - checkip.dyndns.org | sed -e 's/[^[:digit:]\|.]//g'}
-${font Michroma:size=9}${alignr 298}${voffset -42}${color0}${time %a} ${color0}${time %x}
-${font Michroma:size=18}${goto 108}${color1}${voffset -4}${time %H}:${time %M}
-${font Michroma:size=8}${color0}${goto 296}${voffset 20}BATTERY
+#${font Michroma:size=9}${alignr 298}${voffset -42}${color0}${time %a} ${color0}${time %x}
+#${font Michroma:size=18}${goto 108}${color1}${voffset -4}${time %H}:${time %M}
+${font Michroma:size=8}${color0}${goto 296}${voffset 40}BATTERY
 ${font Play:size=8}${color0}${goto 278}${voffset 8}${color1}${battery_percent BAT1}%${endif}${endif}
-${font Play:normal:size=8}${goto 180}Mail${color1}${alignr 110}${execpi 300 python3 ~/.conky/gmail.py}
 #${font Play:normal:size=8}${goto 180}Weather${color1}${alignr 100}${execi 300 ~/bin/weather_simple "EUR|UK|UK241|LONDON"}
-${font Play:normal:size=8}${goto 180}Uptime${color1}${alignr 100}${uptime_short}
+${voffset 20}${font Play:normal:size=8}${goto 180}Uptime${color1}${alignr 100}${uptime_short}
 ${font Michroma:bold:size=11}${color0}${voffset 30}${alignr 100}${nodename}   ${kernel}
 
