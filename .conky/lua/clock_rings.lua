@@ -15,6 +15,19 @@ Changelog:
 *v 2011mint -- reEdit despot77 (18.02.2011)
 ]]
 
+--normal_temp="0x0066FF"
+--warn_temp="0xf0651f"
+--crit_temp="0xf01f42"
+-- Un mélange des deux
+normal="0x0066FF"
+warn="0xff7200"
+crit="0xff000d"
+
+-- seulement quand fond nécessaire
+corner_r=35
+bg_colour=0x333333
+bg_alpha=0.2
+
 settings_table = {
      {
         -- Edit this table to customise your rings.
@@ -100,7 +113,7 @@ settings_table = {
         start_angle=-90,
         end_angle=90
     },
-    {
+    { --6
         name='acpitemp',
         arg='',
         max=110,
@@ -116,7 +129,7 @@ settings_table = {
     },
     {
         name='cpu',
-        arg='cpu0',
+        arg='cpu1',
         max=100,
         bg_colour=0xdddddd,
         bg_alpha=0.8,
@@ -130,7 +143,7 @@ settings_table = {
     },
     {
         name='cpu',
-        arg='cpu1',
+        arg='cpu2',
         max=100,
         bg_colour=0xdddddd,
         bg_alpha=0.7,
@@ -144,7 +157,7 @@ settings_table = {
     },
     {
         name='cpu',
-        arg='cpu2',
+        arg='cpu3',
         max=100,
         bg_colour=0xdddddd,
         bg_alpha=0.6,
@@ -158,7 +171,7 @@ settings_table = {
     },
     {
         name='cpu',
-        arg='cpu3',
+        arg='cpu4',
         max=100,
         bg_colour=0xdddddd,
         bg_alpha=0.5,
@@ -170,7 +183,7 @@ settings_table = {
         start_angle=0,
         end_angle=240
     },
-    {
+    {--11
         name='memperc',
         arg='',
         max=100,
@@ -198,7 +211,7 @@ settings_table = {
         start_angle=180,
         end_angle=420
     },
-    {
+    { --13
         name='fs_used_perc',
         arg='/',
         max=100,
@@ -226,7 +239,7 @@ settings_table = {
         start_angle=0,
         end_angle=240
     },
-    {
+    { --15
         name='downspeedf',
         arg='',
         max=2000,
@@ -390,6 +403,11 @@ function conky_clock_rings()
     end
     
     draw_clock_hands(cr,clock_x,clock_y)
+
+    --temp_watch()
+    --disk_watch()
+    --iface_watch()
+    --conky_ring_stats()
 end
 
 ---------------------------------
@@ -439,32 +457,23 @@ function disk_watch()
     disk=tonumber(conky_parse("${fs_used_perc /}"))
 
     if disk<warn_disk then
-        settings_table[8]['fg_colour']=normal
+        settings_table[13]['fg_colour']=normal
     elseif disk<crit_disk then
-        settings_table[8]['fg_colour']=warn
+        settings_table[13]['fg_colour']=warn
     else
-        settings_table[8]['fg_colour']=crit
+        settings_table[13]['fg_colour']=crit
     end
 
     disk=tonumber(conky_parse("${fs_used_perc /home}"))
 
     if disk<warn_disk then
-        settings_table[9]['fg_colour']=normal
+        settings_table[14]['fg_colour']=normal
     elseif disk<crit_disk then
-        settings_table[9]['fg_colour']=warn
+        settings_table[14]['fg_colour']=warn
     else
-        settings_table[9]['fg_colour']=crit
+        settings_table[14]['fg_colour']=crit
     end
 
-    disk=tonumber(conky_parse("${fs_used_perc /usr}"))
-
-    if disk<warn_disk then
-        settings_table[10]['fg_colour']=normal
-    elseif disk<crit_disk then
-        settings_table[10]['fg_colour']=warn
-    else
-        settings_table[10]['fg_colour']=crit
-    end
 end
 
 -- Contrôle de la température
@@ -476,11 +485,90 @@ function temp_watch()
     temperature=tonumber(conky_parse("${acpitemp}"))
 
     if temperature<warn_value then
-        settings_table[1]['fg_colour']=normal
+        settings_table[6]['fg_colour']=normal
     elseif temperature<crit_value then
-        settings_table[1]['fg_colour']=warn
+        settings_table[6]['fg_colour']=warn
     else
-        settings_table[1]['fg_colour']=crit
+        settings_table[6]['fg_colour']=crit
+    end
+end
+
+function ram_watch()
+
+    warn_value=80
+    crit_value=90
+
+    temperature=tonumber(conky_parse("${memperc}"))
+
+    if temperature<warn_value then
+        settings_table[11]['fg_colour']=normal
+    elseif temperature<crit_value then
+        settings_table[11]['fg_colour']=warn
+    else
+        settings_table[11]['fg_colour']=crit
+    end
+end
+
+function battery_watch()
+
+    warn_value=30
+    crit_value=10
+
+    temperature=tonumber(conky_parse("${battery_percent BAT1}"))
+
+    if temperature>warn_value then
+        settings_table[17]['fg_colour']=normal
+    elseif temperature<warn_value then
+        settings_table[17]['fg_colour']=warn
+    elseif temperature<crit_value then
+        settings_table[17]['fg_colour']=crit
+    end
+end
+
+
+function cpu_watch()
+
+    warn_value=80
+    crit_value=90
+
+    temperature=tonumber(conky_parse("${cpu cpu1}"))
+
+    if temperature<warn_value then
+        settings_table[7]['fg_colour']=normal
+    elseif temperature<crit_value then
+        settings_table[7]['fg_colour']=warn
+    else
+        settings_table[7]['fg_colour']=crit
+    end
+
+    temperature=tonumber(conky_parse("${cpu cpu2}"))
+
+    if temperature<warn_value then
+        settings_table[8]['fg_colour']=normal
+    elseif temperature<crit_value then
+        settings_table[8]['fg_colour']=warn
+    else
+        settings_table[8]['fg_colour']=crit
+    end
+
+    temperature=tonumber(conky_parse("${cpu cpu3}"))
+
+    if temperature<warn_value then
+        settings_table[9]['fg_colour']=normal
+    elseif temperature<crit_value then
+        settings_table[9]['fg_colour']=warn
+    else
+        settings_table[9]['fg_colour']=crit
+    end
+
+    temperature=tonumber(conky_parse("${cpu cpu4}"))
+
+    if temperature<warn_value then
+        settings_table[10]['fg_colour']=normal
+    elseif temperature<crit_value then
+        settings_table[10]['fg_colour']=warn
+    else
+        settings_table[10]['fg_colour']=crit
     end
 end
 
@@ -489,8 +577,8 @@ function iface_watch()
 
     iface=conky_parse("${if_existing /proc/net/route wlp6s0}wlp6s0${else}wlan0${endif}")
 
-    settings_table[11]['arg']=iface
-    settings_table[12]['arg']=iface
+    settings_table[15]['arg']=iface
+    settings_table[16]['arg']=iface
 end
 
 function conky_draw_bg()
@@ -518,6 +606,9 @@ end
 function conky_main()
     temp_watch()
     disk_watch()
+    ram_watch()
+    cpu_watch()
+    battery_watch()
     iface_watch()
     conky_ring_stats()
 
